@@ -1,42 +1,52 @@
-# frontendnow
+# Linie F – Konferenzplattform für FrontendNow 2026
 
-This template should help get you started developing with Vue 3 in Vite.
+Teamprojekt im Kurs „NextGen Web Frontends“ (2026).
+Team: Christian Fally, Jakob Pronebner
 
-## Recommended IDE Setup
+Linie F stellt das Programm der Konferenz FrontendNow als Liniennetz dar: Jeder Track ist eine Linie, jede Session eine Station, „Mein Programm“ die persönliche Route.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Voraussetzungen
 
-## Recommended Browser Setup
+- Node.js `^22.18.0` oder `>=24.12.0`
+- npm
+- Git
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+## Setup
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+```bash
+git clone https://github.com/Fallian123/frontendNow.git
+cd frontendnow
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+Die Anwendung läuft danach unter der Adresse, die Vite im Terminal ausgibt (standardmäßig http://localhost:5173).
 
-```sh
-npm run build
+## Projektstruktur
+
+```text
+docs/schritt1/          Planungs- und Architekturdokumente (01–04)
+tokens/tokens.css       Design Tokens (primitiv + semantisch)
+src/
+├── components/
+│   ├── base/           generische UI-Primitives
+│   ├── features/       Komponenten mit Konferenzlogik
+│   └── layout/         Header, Footer
+├── composables/        useConferenceData, useSchedule
+├── data/               conference-data.json
+├── types/              Typen des Datensatzes
+├── views/              eine Komponente je Route
+└── router/             Routendefinitionen
 ```
+
+## Dokumentation (Schritt 1)
+
+1. [Branding & Design Tokens](docs/schritt1/01-branding-design-tokens.md)
+2. [ADR Komponenten- und Ordnerarchitektur](docs/schritt1/02-architektur-adr.md)
+3. [State-Management-Konzept](docs/schritt1/03-state-management-konzept.md)
+4. [ADR Projekt-Setup](docs/schritt1/04-technologie-adr.md)
+
+## Arbeitsweise
+
+- `main` enthält nur reviewte Stände.
+- Jede Änderung erfolgt auf einem eigenen Branch (`feat/…`, `docs/…`) und wird per Pull Request gemerged.
