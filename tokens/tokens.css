@@ -1,0 +1,132 @@
+/* =========================================================================
+   Linie F – Design Tokens
+   Aufbau in zwei Ebenen:
+   1. Primitive Tokens  (--primitive-*): Rohwerte, ohne Verwendungszweck.
+   2. Semantische Tokens (--color-*, --space-*, --font-*, …): Verwendungszweck.
+   Komponenten verwenden AUSSCHLIESSLICH semantische Tokens.
+   Ein Theme (z. B. Dark Mode) überschreibt nur die semantische Ebene.
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   1. PRIMITIVE TOKENS
+   ------------------------------------------------------------------------- */
+:root {
+  /* Neutrale Farben */
+  --primitive-color-ink-900: #1f2328;
+  --primitive-color-ink-600: #5c6370;
+  --primitive-color-paper-50: #f7f3ea;
+  --primitive-color-white: #ffffff;
+  --primitive-color-sand-300: #d8cfbe; /* nur dekorativ, nicht für Text oder Bedienelemente */
+
+  /* Markenfarbe „Signalrot“ */
+  --primitive-color-red-700: #b3122e;
+  --primitive-color-red-800: #8e0e24;
+
+  /* Linienfarben (je Track eine Linie) */
+  --primitive-color-violet-700: #6b3fa0;
+  --primitive-color-orange-700: #b5440f;
+  --primitive-color-green-700: #1e7346;
+  --primitive-color-blue-700: #1f5fad;
+
+  /* Spacing-Basis: 4px-Raster */
+  --primitive-size-1: 0.25rem; /*  4px */
+  --primitive-size-2: 0.5rem; /*  8px */
+  --primitive-size-3: 0.75rem; /* 12px */
+  --primitive-size-4: 1rem; /* 16px */
+  --primitive-size-6: 1.5rem; /* 24px */
+  --primitive-size-8: 2rem; /* 32px */
+  --primitive-size-12: 3rem; /* 48px */
+  --primitive-size-16: 4rem; /* 64px */
+
+  /* Typografie: Modular Scale 1.25 (Major Third), Basis 16px */
+  --primitive-font-size-100: 0.8rem; /* 12.8px */
+  --primitive-font-size-200: 1rem; /* 16px   */
+  --primitive-font-size-300: 1.25rem; /* 20px   */
+  --primitive-font-size-400: 1.563rem; /* 25px   */
+  --primitive-font-size-500: 1.953rem; /* 31.25px */
+  --primitive-font-size-600: 2.441rem; /* 39px   */
+
+  --primitive-font-weight-regular: 400;
+  --primitive-font-weight-semibold: 600;
+  --primitive-font-weight-bold: 700;
+
+  --primitive-line-height-tight: 1.2;
+  --primitive-line-height-normal: 1.5;
+
+  --primitive-font-family-sans:
+    system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --primitive-font-family-mono: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+
+  /* Form */
+  --primitive-radius-sm: 4px;
+  --primitive-radius-pill: 999px;
+  --primitive-border-thin: 1px;
+  --primitive-border-line: 4px; /* „Linie“ als Markenelement */
+}
+
+/* -------------------------------------------------------------------------
+   2. SEMANTISCHE TOKENS (Standard-Theme: hell)
+   ------------------------------------------------------------------------- */
+:root {
+  /* Flächen */
+  --color-surface: var(--primitive-color-paper-50);
+  --color-surface-raised: var(--primitive-color-white);
+
+  /* Text */
+  --color-text-primary: var(--primitive-color-ink-900);
+  --color-text-secondary: var(--primitive-color-ink-600);
+  --color-text-on-accent: var(--primitive-color-white);
+
+  /* Akzent / Interaktion */
+  --color-accent: var(--primitive-color-red-700);
+  --color-accent-hover: var(--primitive-color-red-800);
+  --color-link: var(--primitive-color-red-700);
+  --color-focus-ring: var(--primitive-color-ink-900);
+
+  /* Linien & Rahmen */
+  --color-border-subtle: var(--primitive-color-sand-300);
+  --color-border-strong: var(--primitive-color-ink-600);
+
+  /* Status */
+  --color-danger: var(--primitive-color-red-700);
+
+  /* Track-Linienfarben (Schlüssel = trackId aus conference-data.json) */
+  --color-track-keynote: var(--primitive-color-red-700);
+  --color-track-frontend-architecture: var(--primitive-color-violet-700);
+  --color-track-rendering-performance: var(--primitive-color-orange-700);
+  --color-track-ai-dx: var(--primitive-color-green-700);
+  --color-track-design-systems: var(--primitive-color-blue-700);
+
+  /* Spacing */
+  --space-xs: var(--primitive-size-1);
+  --space-sm: var(--primitive-size-2);
+  --space-md: var(--primitive-size-4);
+  --space-lg: var(--primitive-size-6);
+  --space-xl: var(--primitive-size-8);
+  --space-2xl: var(--primitive-size-12);
+  --space-3xl: var(--primitive-size-16);
+
+  /* Typografie */
+  --font-family-base: var(--primitive-font-family-sans);
+  --font-family-code: var(--primitive-font-family-mono);
+
+  --font-size-caption: var(--primitive-font-size-100);
+  --font-size-body: var(--primitive-font-size-200);
+  --font-size-heading-sm: var(--primitive-font-size-300);
+  --font-size-heading-md: var(--primitive-font-size-400);
+  --font-size-heading-lg: var(--primitive-font-size-500);
+  --font-size-display: var(--primitive-font-size-600);
+
+  --font-weight-body: var(--primitive-font-weight-regular);
+  --font-weight-heading: var(--primitive-font-weight-bold);
+  --font-weight-label: var(--primitive-font-weight-semibold);
+
+  --line-height-body: var(--primitive-line-height-normal);
+  --line-height-heading: var(--primitive-line-height-tight);
+
+  /* Form */
+  --radius-control: var(--primitive-radius-sm);
+  --radius-badge: var(--primitive-radius-pill);
+  --border-width-default: var(--primitive-border-thin);
+  --border-width-line: var(--primitive-border-line);
+}
