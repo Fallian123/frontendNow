@@ -13,7 +13,13 @@ const error = ref<Error | null>(null)
 let loadPromise: Promise<void> | null = null
 
 const conference = computed(() => data.value?.conference ?? null)
-const sessions = computed<Session[]>(() => data.value?.sessions ?? [])
+// Zentral chronologisch sortiert (Kopie, Datensatz bleibt unverändert). sort() ist stabil:
+// bei gleicher Startzeit bleibt die Reihenfolge aus der JSON-Datei erhalten.
+const sessions = computed<Session[]>(() =>
+  [...(data.value?.sessions ?? [])].sort((a, b) =>
+    (a.day + a.startTime).localeCompare(b.day + b.startTime),
+  ),
+)
 const tracks = computed<Track[]>(() => data.value?.tracks ?? [])
 const rooms = computed<Room[]>(() => data.value?.rooms ?? [])
 const speakers = computed<Speaker[]>(() => data.value?.speakers ?? [])

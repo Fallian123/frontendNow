@@ -3,7 +3,9 @@
  * Der Datensatz ist normalisiert: Sessions verweisen per ID auf Tracks, Räume und Speaker.
  */
 
-export type SessionLevel = 'Einsteiger' | 'Fortgeschritten' | 'Experte'
+/** Reihenfolge = fachliche Reihenfolge (für Filter-Dropdown); der Typ wird daraus abgeleitet. */
+export const SESSION_LEVELS = ['Einsteiger', 'Fortgeschritten', 'Experte'] as const
+export type SessionLevel = (typeof SESSION_LEVELS)[number]
 export type SessionFormat = 'Vortrag' | 'Workshop' | 'Podium'
 
 export interface ConferenceInfo {
