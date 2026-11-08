@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import { useSchedule } from '@/composables/useSchedule.ts'
+import { useSchedule } from '@/composables/useSchedule'
 
 const { mySessions, count } = useSchedule()
 </script>

@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import BaseBadge from '@/components/base/BaseBadge.vue'
-import BookmarkToggle from '@/components/features/BookMarkToggle.vue'
+import BookmarkToggle from '@/components/features/BookmarkToggle.vue'
 import SessionMeta from '@/components/features/SessionMeta.vue'
 import { useConferenceData } from '@/composables/useConferenceData'
 import type { Speaker } from '@/types/conference'
