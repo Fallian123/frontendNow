@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import BaseBadge from '@/components/base/BaseBadge.vue'
 import BaseCard from '@/components/base/BaseCard.vue'
+import BookmarkToggle from '@/components/features/BookmarkToggle.vue'
 import SessionMeta from '@/components/features/SessionMeta.vue'
 import { useConferenceData } from '@/composables/useConferenceData'
 import type { Session, Speaker } from '@/types/conference'
@@ -39,6 +40,9 @@ const speakers = computed(() =>
         </RouterLink>
       </template>
     </p>
+    <div>
+      <BookmarkToggle :session-id="session.id" />
+    </div>
 
   </BaseCard>
 </template>
