@@ -10,6 +10,12 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: '/speaker/:id',
+      name: 'speaker',
+      component: () => import('@/views/SpeakerDetailView.vue'),
+      props: true,
+    },
+    {
       path: '/session/:id',
       name: 'session',
       component: () => import('@/views/SessionDetailView.vue'),
