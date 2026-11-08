@@ -1,17 +1,36 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import BaseCard from '@/components/base/BaseCard.vue'
+import SessionCard from '@/components/features/SessionCard.vue'
+import SessionFilter from '@/components/features/SessionFilter.vue'
 import TrackOverview from '@/components/features/TrackOverview.vue'
-import { useConferenceData } from '@/composables/useConferenceData.ts'
+import { useConferenceData } from '@/composables/useConferenceData'
 
 const { conference, sessions, speakers, tracks, isLoading, error } = useConferenceData()
+const selectedTrack = ref('')
+const selectedDay = ref('')
+const selectedLevel = ref('')
 
-const dateFormat = new Intl.DateTimeFormat('de-AT', { day: 'numeric', month: 'long' })
+const dateFormat = new Intl.DateTimeFormat('de-AT', {
+  day: 'numeric',
+  month: 'long',
+  timeZone: 'UTC',
+})
+
 const dateRange = computed(() => {
   const dates = conference.value?.dates ?? []
   if (dates.length === 0) return ''
   return dates.map((d) => dateFormat.format(new Date(d))).join(' & ')
 })
+
+const filteredSessions = computed(() =>
+  sessions.value.filter(
+    (s) =>
+      (!selectedTrack.value || s.trackId === selectedTrack.value) &&
+      (!selectedDay.value || s.day === selectedDay.value) &&
+      (!selectedLevel.value || s.level === selectedLevel.value),
+  ),
+)
 </script>
 
 <template>
@@ -45,6 +64,26 @@ const dateRange = computed(() => {
       <section>
         <h2>Liniennetz</h2>
         <TrackOverview />
+      </section>
+
+      <section class="program">
+        <h2>Programm</h2>
+        <SessionFilter
+          v-model:track="selectedTrack"
+          v-model:day="selectedDay"
+          v-model:level="selectedLevel"
+        />
+
+        <p role="status" data-testid="result-count">
+          {{ filteredSessions.length }} von {{ sessions.length }} Sessions
+        </p>
+
+        <ul v-if="filteredSessions.length" class="session-list">
+          <li v-for="session in filteredSessions" :key="session.id">
+            <SessionCard :session="session" />
+          </li>
+        </ul>
+        <p v-else class="empty">Keine Session erfüllt alle gewählten Filter.</p>
       </section>
     </template>
   </div>
@@ -97,5 +136,21 @@ section > h2 {
 
 .error {
   color: var(--color-danger);
+}
+
+.program {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.session-list {
+  display: grid;
+  gap: var(--space-md);
+  padding: 0;
+  list-style: none;
+}
+
+.empty {
+  color: var(--color-text-secondary);
 }
 </style>
