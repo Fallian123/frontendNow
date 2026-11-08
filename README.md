@@ -35,6 +35,7 @@ src/
 ├── composables/        useConferenceData, useSchedule
 ├── data/               conference-data.json
 ├── types/              Typen des Datensatzes
+├── utils               Format Helper
 ├── views/              eine Komponente je Route
 └── router/             Routendefinitionen
 ```
@@ -45,6 +46,19 @@ src/
 2. [ADR Komponenten- und Ordnerarchitektur](docs/schritt1/02-architektur-adr.md)
 3. [State-Management-Konzept](docs/schritt1/03-state-management-konzept.md)
 4. [ADR Projekt-Setup](docs/schritt1/04-technologie-adr.md)
+
+## Rendering-Strategie (Schritt 2)
+
+Begründete Zuordnung je Anwendungsteil: [ADR Rendering-Strategie](docs/schritt2/01-rendering-strategie-adr.md)
+
+| Teil | Ziel-Strategie | Stand in Schritt 2 |
+| :--- | :--- | :--- |
+| Speaker-Profile `/speaker/:id` | SSG | CSR-Route je ID (simuliert) |
+| Session-Detail `/session/:id` | SSG | CSR-Route je ID (simuliert) |
+| Übersicht `/` | SSG + clientseitiger Filter (Szenario: SSR/ISR) | CSR |
+| Mein Programm `/mein-programm` | CSR | CSR |
+
+Start- und Build-Befehle sind unverändert (`npm run dev`, `npm run build`).
 
 ## Arbeitsweise
 
