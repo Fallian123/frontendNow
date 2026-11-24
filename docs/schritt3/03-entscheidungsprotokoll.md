@@ -33,7 +33,7 @@ Belege: assets/s1-offline-uebersicht.png, assets/s1-cache-storage.png, assets/s1
 
 ### Szenario 2: „Mein Programm“ offline, nachdem Sessions hinzugefügt wurden
 
-Ausgangslage war der Produktions-Build auf localhost:4173 in einem privaten Chrome-Fenster, der Service Worker war aktiv und die Seite zuvor online geladen. Online wurden drei Sessions über den Merken-Button zu „Mein Programm“ hinzugefügt. Anschließend wurde das Throttling auf „Offline“ gestellt und die Route /mein-programm direkt neu geladen, um den Navigations-Fallback zu prüfen. Die Seite wurde vollständig dargestellt, die Anzeige „3 Sessions gemerkt“ stimmte mit dem Eintrag frontendnow:schedule:v1 im Local Storage überein. Die Skripte wurde mit Status 200 vom Service Worker beantwortet. Ergebnis: bestanden.
+Ausgangslage war der Produktions-Build auf localhost:4173 in einem privaten Chrome-Fenster, der Service Worker war aktiv und die Seite zuvor online geladen. Online wurden drei Sessions über den Merken-Button zu „Mein Programm“ hinzugefügt. Anschließend wurde das Throttling auf „Offline“ gestellt und die Route /mein-programm direkt neu geladen, um den Navigations-Fallback zu prüfen. Die Seite wurde vollständig dargestellt, die Anzeige „3 Sessions gemerkt“ stimmte mit dem Eintrag frontendnow:schedule:v1 im Local Storage überein. Die Skripte wurden mit Status 200 vom Service Worker beantwortet. Ergebnis: bestanden.
 
 Belege: assets/s2-mein-programm-offline.png, assets/s2-local-storage.png
 
