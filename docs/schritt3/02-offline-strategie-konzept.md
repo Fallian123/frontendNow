@@ -1,0 +1,15 @@
+# 02 – Offline-Strategie: Konzept
+
+Ziel dieses Konzepts ist eine Caching-Entscheidung je Datentyp, welche zur realen Nutzung einer Konferenz passt: Besucher:innen sitzen im Vortragssaal mit überlastetem WLAN oder wechseln zwischen zwei Sessions in den Flugmodus.
+
+Die App-Shell (index.html, JavaScript- und CSS-Chunks, Token-CSS, Icons) wird beim Installieren des Service Workers vollständig vorab gecacht (Precache, Cache-First). Da die Dateinamen einen Hash enthalten, ist ein Update eindeutig erkennbar, und die App startet offline ohne Netzwerkzugriff. Schriftarten müssen nicht gecacht werden, weil der System-Font-Stack verwendet wird.
+
+Die Sessions- und Speaker-Daten werden per dynamischem Import geladen und liegen daher als JavaScript-Chunk im Build. Sie werden mit der App-Shell vorab gecacht, ebenfalls als Cache-First. Der Zeitplan ist laut ADR 01 nach der Veröffentlichung stabil, wodurch ein Rebuild mit neuem Deploy für Änderungen ausreicht. Weiters werden alle lazy geladenen Routen-Chunks vorab gecacht, da eine nie besuchte Session-Detailseite offline sonst nicht verfügbar wäre.
+
+„Mein Programm“ liegt im localStorage und benötigt keine Caching-Regel für Daten. Entscheidend ist, dass die Route /mein-programm offline erreichbar ist. Dafür liefert der Service Worker bei Navigationsanfragen die gecachte index.html aus, wodurch auch ein Neuladen auf einer Unterseite funktioniert.
+
+Als Alternative wurde Stale-While-Revalidate (SWR) verglichen: Der Cache liefert sofort, im Hintergrund wird die neue Version geladen. Diese Strategie wäre nötig, wenn sich Raum oder Zeit einer Session kurzfristig ändern, die Daten als eigene JSON-Datei vorliegen und Besucher:innen die Änderung ohne neue App-Version erhalten sollen. Sie wurde nicht gewählt, da es aktuell keine Datei gibt, auf welche sie wirken könnte, und sie eine Änderung am Datenzugriff aus Dokument 03 erfordern würde.
+
+Zum Vergleich der beiden Strategien: Cache-First liefert in jedem Netzwerkzustand dieselbe Antwortzeit und verbraucht keine Daten, zeigt dafür bis zum nächsten Update den Stand der letzten Installation. Stale-While-Revalidate hält die Daten aktueller, benötigt aber bei jedem Aufruf eine Netzwerkanfrage im Hintergrund, welche im überlasteten WLAN verzögert werden oder fehlschlagen kann. Für ein Programm, das sich nach der Veröffentlichung kaum ändert, überwiegt daher der Vorteil von Cache-First. Neue App-Versionen werden durch registerType: autoUpdate automatisch aktiviert, sodass der Datenstand nach dem nächsten Besuch mit Netz aktualisiert wird.
+
+Im schlimmsten Fall bricht die Verbindung mitten in der Nutzung ab. Bereits geladene Seiten bleiben sichtbar, alle Navigationen werden aus dem Cache bedient und das Programm bleibt im localStorage erhalten. Nicht möglich ist der Erstbesuch ohne vorheriges Online-Laden, da noch kein Service Worker existiert.
